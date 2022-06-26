@@ -2,6 +2,5 @@
 
 # Login
 
-# User Id = Nanta
-
-# Pass = 123ok
+User Id = Nanta
+Pass = 123ok
