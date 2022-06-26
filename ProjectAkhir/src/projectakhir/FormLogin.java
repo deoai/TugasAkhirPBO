@@ -50,7 +50,7 @@ public class FormLogin extends javax.swing.JFrame {
             if(baris==1) {
                 JOptionPane.showMessageDialog(null, "User dan Password Cocok");
                 dispose();
-    //            new FormMenu().setVisible(true);
+                new FormMenu().setVisible(true);
             }
             else {
                 JOptionPane.showMessageDialog(null, "User atau Password tdk Cocok -> "+txtUserId.getText()+" --> "+password);
@@ -78,6 +78,7 @@ public class FormLogin extends javax.swing.JFrame {
         txtPassword = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Login");
 
         jLabel1.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
         jLabel1.setText("LOGIN");

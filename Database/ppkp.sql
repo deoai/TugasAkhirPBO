@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 25 Jun 2022 pada 13.25
+-- Waktu pembuatan: 26 Jun 2022 pada 10.35
 -- Versi server: 10.4.22-MariaDB
 -- Versi PHP: 8.0.13
 
@@ -28,6 +28,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `peserta` (
+  `kode` varchar(5) NOT NULL,
   `nik` varchar(16) NOT NULL,
   `nama` varchar(255) NOT NULL,
   `tempat_lahir` varchar(50) NOT NULL,
@@ -40,6 +41,13 @@ CREATE TABLE `peserta` (
   `kecamatan` varchar(255) NOT NULL,
   `kabupaten` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `peserta`
+--
+
+INSERT INTO `peserta` (`kode`, `nik`, `nama`, `tempat_lahir`, `tanggal_lahir`, `umur`, `jenis_kelamin`, `jurusan`, `alamat`, `kelurahan`, `kecamatan`, `kabupaten`) VALUES
+('2', '1212323', 'Nantalira', 'Batang', '2018-09-07', 12, 'Laki-laki', 'Ti', 'Srabanan', 'Babadan', 'Limpung ', 'Batang');
 
 -- --------------------------------------------------------
 
@@ -72,7 +80,7 @@ INSERT INTO `user` (`id`, `user_id`, `name`, `password`) VALUES
 -- Indeks untuk tabel `peserta`
 --
 ALTER TABLE `peserta`
-  ADD PRIMARY KEY (`nik`);
+  ADD PRIMARY KEY (`kode`);
 
 --
 -- Indeks untuk tabel `user`
