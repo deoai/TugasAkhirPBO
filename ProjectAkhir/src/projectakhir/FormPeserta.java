@@ -96,7 +96,7 @@ public class FormPeserta extends javax.swing.JFrame {
                 dataTable[x][5] = RsBrg.getInt("umur");
                 dataTable[x][6] = RsBrg.getString("jenis_kelamin");
                 dataTable[x][7] = RsBrg.getString("jurusan");
-                dataTable[x][8] = RsBrg.getString("ipk");
+                dataTable[x][8] = RsBrg.getFloat("ipk");
                 dataTable[x][9] = RsBrg.getString("no_hp");
                 dataTable[x][10] = RsBrg.getString("email");
                 dataTable[x][11] = RsBrg.getString("alamat");
