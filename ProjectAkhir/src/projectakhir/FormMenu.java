@@ -56,6 +56,11 @@ public class FormMenu extends javax.swing.JFrame {
         jMenu1.add(dtPeserta);
 
         jMenuItem2.setText("User");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem2);
         jMenu1.add(jSeparator1);
 
@@ -125,6 +130,10 @@ public class FormMenu extends javax.swing.JFrame {
     private void dtKelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dtKelActionPerformed
         new FormKelurahan().setVisible(true);
     }//GEN-LAST:event_dtKelActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        new FormUser().setVisible(true);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     /**
      * @param args the command line arguments
