@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 27 Jun 2022 pada 07.50
+-- Waktu pembuatan: 27 Jun 2022 pada 10.15
 -- Versi server: 10.4.22-MariaDB
 -- Versi PHP: 8.0.13
 
@@ -33,6 +33,16 @@ CREATE TABLE `kabupaten` (
   `kuota_kec` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data untuk tabel `kabupaten`
+--
+
+INSERT INTO `kabupaten` (`kode`, `nama`, `kuota_kec`) VALUES
+('KAB01', 'Pekalongan', 5),
+('KAB02', 'Batang', 3),
+('KAB03', 'Kendal', 4),
+('KAB04', 'Semarang', 7);
+
 -- --------------------------------------------------------
 
 --
@@ -42,8 +52,18 @@ CREATE TABLE `kabupaten` (
 CREATE TABLE `kecamatan` (
   `kode` varchar(5) NOT NULL,
   `nama` varchar(100) NOT NULL,
+  `kabupaten` varchar(100) NOT NULL,
   `kuota_kel` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `kecamatan`
+--
+
+INSERT INTO `kecamatan` (`kode`, `nama`, `kabupaten`, `kuota_kel`) VALUES
+('KC01', 'Limpung', 'Batang', 3),
+('KC02', 'Semarang Barat', 'Semarang', 5),
+('KC03', 'Ungaran', 'Semarang', 6);
 
 -- --------------------------------------------------------
 
@@ -54,8 +74,16 @@ CREATE TABLE `kecamatan` (
 CREATE TABLE `kelurahan` (
   `kode` varchar(5) NOT NULL,
   `nama` varchar(100) NOT NULL,
+  `kecamatan` varchar(100) NOT NULL,
   `kuota_ang` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `kelurahan`
+--
+
+INSERT INTO `kelurahan` (`kode`, `nama`, `kecamatan`, `kuota_ang`) VALUES
+('KL01', 'Babadan', 'Limpung', 11);
 
 -- --------------------------------------------------------
 

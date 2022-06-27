@@ -311,9 +311,10 @@
     <Component class="javax.swing.JComboBox" name="cmbKelamin">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="2">
-            <StringItem index="0" value="Laki-laki"/>
-            <StringItem index="1" value="Perempuan"/>
+          <StringArray count="3">
+            <StringItem index="0" value="--- PILIH ---"/>
+            <StringItem index="1" value="Laki-laki"/>
+            <StringItem index="2" value="Perempuan"/>
           </StringArray>
         </Property>
       </Properties>

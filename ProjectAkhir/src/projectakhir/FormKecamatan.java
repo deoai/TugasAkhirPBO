@@ -13,10 +13,10 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Nantodd
  */
-public class FormKelurahan extends javax.swing.JFrame {
+public class FormKecamatan extends javax.swing.JFrame {
 
     /**
-     * Creates new form FormKelurahan
+     * Creates new form FormKecamatan
      */
     
     Connection Con;
@@ -24,12 +24,12 @@ public class FormKelurahan extends javax.swing.JFrame {
     Statement stm;
 
     Boolean ada = false;
-    String kKec;
+    String kKab;
     Boolean edit=false;
 
     private Object[][] dataTable = null;
-    private String[] header ={"Kode Kelurahan", "Nama Kelurahan", "Kecamatan", "Kuota Peserta"};
-    public FormKelurahan() {
+    private String[] header ={"Kode Kecamatan", "Nama Kecamatan", "Kabupaten", "Kuota Kelurahann"};
+    public FormKecamatan() {
         initComponents();
         open_db();
         baca_data();
@@ -39,11 +39,11 @@ public class FormKelurahan extends javax.swing.JFrame {
     }
     
     private void setField() {
-        int row=tblKel.getSelectedRow();
-        txtKode.setText((String)tblKel.getValueAt(row,0));
-        txtNama.setText((String)tblKel.getValueAt(row,1));
-        cmbKec.setSelectedItem((String)tblKel.getValueAt(row,2));
-        String kuota = Integer.toString((Integer)tblKel.getValueAt(row,3));
+        int row=tblKec.getSelectedRow();
+        txtKode.setText((String)tblKec.getValueAt(row,0));
+        txtNama.setText((String)tblKec.getValueAt(row,1));
+        cmbKab.setSelectedItem((String)tblKec.getValueAt(row,2));
+        String kuota = Integer.toString((Integer)tblKec.getValueAt(row,3));
         txtKuota.setText(kuota);
     }
     
@@ -56,11 +56,11 @@ public class FormKelurahan extends javax.swing.JFrame {
             System.out.println("Error : "+e);
         }
     }
-
+    
     private void baca_data() {
         try {
             stm = Con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
-            RsBrg = stm.executeQuery("select * from kelurahan order by kode asc");
+            RsBrg = stm.executeQuery("select * from kecamatan order by kode asc");
 
             ResultSetMetaData meta = RsBrg.getMetaData();
             int col = meta.getColumnCount();
@@ -74,11 +74,11 @@ public class FormKelurahan extends javax.swing.JFrame {
             while(RsBrg.next()) {
                 dataTable[x][0] = RsBrg.getString("kode");
                 dataTable[x][1] = RsBrg.getString("nama");
-                dataTable[x][2] = RsBrg.getString("kecamatan");
-                dataTable[x][3] = RsBrg.getInt("kuota_ang");
+                dataTable[x][2] = RsBrg.getString("kabupaten");
+                dataTable[x][3] = RsBrg.getInt("kuota_kel");
                 x++;
             } 
-            tblKel.setModel(new DefaultTableModel(dataTable,header)); 
+            tblKec.setModel(new DefaultTableModel(dataTable,header)); 
         } catch(SQLException e) {
             JOptionPane.showMessageDialog(null, e);
         }
@@ -87,10 +87,10 @@ public class FormKelurahan extends javax.swing.JFrame {
     private void select_item() {
         try {
             stm=Con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
-            ResultSet rs=stm.executeQuery("select nama from kecamatan");
+            ResultSet rs=stm.executeQuery("select nama from kabupaten");
             rs.beforeFirst();
             while(rs.next()) {
-                cmbKec.addItem(rs.getString(1).trim());
+                cmbKab.addItem(rs.getString(1).trim());
             }
             rs.close();
         } catch(SQLException e) {
@@ -118,6 +118,7 @@ public class FormKelurahan extends javax.swing.JFrame {
         cmdBatal.setEnabled(!t);
         cmdKeluar.setEnabled(t); 
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -127,69 +128,82 @@ public class FormKelurahan extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel3 = new javax.swing.JLabel();
-        txtKuota = new javax.swing.JTextField();
-        cmbKec = new javax.swing.JComboBox<>();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        tblKel = new javax.swing.JTable();
         jLabel12 = new javax.swing.JLabel();
-        cmdTambah = new javax.swing.JButton();
         cmdHapus = new javax.swing.JButton();
-        cmdSimpan = new javax.swing.JButton();
         txtKode = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
         cmdBatal = new javax.swing.JButton();
-        cmdKoreksi = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
         cmdKeluar = new javax.swing.JButton();
         txtNama = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        txtKuota = new javax.swing.JTextField();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tblKec = new javax.swing.JTable();
+        cmdTambah = new javax.swing.JButton();
+        cmdSimpan = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        cmdKoreksi = new javax.swing.JButton();
+        jLabel13 = new javax.swing.JLabel();
+        cmbKab = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Form Kelurahan");
-
-        jLabel3.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
-        jLabel3.setText("Kuota Peserta");
-
-        txtKuota.setToolTipText("");
-
-        cmbKec.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--- PILIH ---" }));
-        cmbKec.setToolTipText("");
-        cmbKec.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbKecActionPerformed(evt);
-            }
-        });
-
-        tblKel.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Kode Kelurahan", "Nama Kelurahan", "Kecamatan", "Kuota Peserta"
-            }
-        ));
-        tblKel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblKelMouseClicked(evt);
-            }
-        });
-        jScrollPane3.setViewportView(tblKel);
+        setTitle("Form Kecamatan");
 
         jLabel12.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
-        jLabel12.setText("Kode Kelurahan");
-
-        cmdTambah.setText("Tambah");
-        cmdTambah.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmdTambahActionPerformed(evt);
-            }
-        });
+        jLabel12.setText("Kode Kecamatan");
 
         cmdHapus.setText("Hapus");
         cmdHapus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmdHapusActionPerformed(evt);
+            }
+        });
+
+        txtKode.setToolTipText("");
+
+        cmdBatal.setText("Batal");
+        cmdBatal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdBatalActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
+        jLabel2.setText("Nama Kecamatan");
+
+        cmdKeluar.setText("Keluar");
+        cmdKeluar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdKeluarActionPerformed(evt);
+            }
+        });
+
+        txtNama.setToolTipText("");
+
+        jLabel3.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
+        jLabel3.setText("Kuota Kelurahan");
+
+        txtKuota.setToolTipText("");
+
+        tblKec.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Kode Kecamatan", "Nama Kecamatan", "Kabupaten", "Kuota Kelurahan"
+            }
+        ));
+        tblKec.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblKecMouseClicked(evt);
+            }
+        });
+        jScrollPane3.setViewportView(tblKec);
+
+        cmdTambah.setText("Tambah");
+        cmdTambah.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdTambahActionPerformed(evt);
             }
         });
 
@@ -200,17 +214,8 @@ public class FormKelurahan extends javax.swing.JFrame {
             }
         });
 
-        txtKode.setToolTipText("");
-
         jLabel1.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
-        jLabel1.setText("Data Kelurahan");
-
-        cmdBatal.setText("Batal");
-        cmdBatal.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmdBatalActionPerformed(evt);
-            }
-        });
+        jLabel1.setText("Data Kecamatan");
 
         cmdKoreksi.setText("Koreksi");
         cmdKoreksi.addActionListener(new java.awt.event.ActionListener() {
@@ -219,20 +224,16 @@ public class FormKelurahan extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
-        jLabel2.setText("Nama Kelurahan");
-
         jLabel13.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
-        jLabel13.setText("Kecamatan");
+        jLabel13.setText("Kabupaten");
 
-        cmdKeluar.setText("Keluar");
-        cmdKeluar.addActionListener(new java.awt.event.ActionListener() {
+        cmbKab.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--- PILIH ---" }));
+        cmbKab.setToolTipText("");
+        cmbKab.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmdKeluarActionPerformed(evt);
+                cmbKabActionPerformed(evt);
             }
         });
-
-        txtNama.setToolTipText("");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -266,7 +267,7 @@ public class FormKelurahan extends javax.swing.JFrame {
                             .addComponent(txtKode, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
                             .addComponent(txtKuota, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
                             .addComponent(txtNama, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
-                            .addComponent(cmbKec, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(cmbKab, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -284,7 +285,7 @@ public class FormKelurahan extends javax.swing.JFrame {
                     .addComponent(txtNama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cmbKec, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbKab, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel13))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -306,15 +307,28 @@ public class FormKelurahan extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cmbKecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbKecActionPerformed
-        JComboBox cKec = (javax.swing.JComboBox)evt.getSource();
-        //Membaca Item Yang Terpilih — > String
-        kKec = (String)cKec.getSelectedItem();
-    }//GEN-LAST:event_cmbKecActionPerformed
+    private void cmdHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdHapusActionPerformed
+        try{
+            String sql="delete from kabupaten where kode='" + txtKode.getText()+ "'";
+            stm.executeUpdate(sql);
+            baca_data();
+        } catch(SQLException e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }//GEN-LAST:event_cmdHapusActionPerformed
 
-    private void tblKelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblKelMouseClicked
+    private void cmdBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdBatalActionPerformed
+        aktif(false);
+        setTombol(true);
+    }//GEN-LAST:event_cmdBatalActionPerformed
+
+    private void cmdKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdKeluarActionPerformed
+        dispose();
+    }//GEN-LAST:event_cmdKeluarActionPerformed
+
+    private void tblKecMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblKecMouseClicked
         setField();
-    }//GEN-LAST:event_tblKelMouseClicked
+    }//GEN-LAST:event_tblKecMouseClicked
 
     private void cmdTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdTambahActionPerformed
         aktif(true);
@@ -323,16 +337,6 @@ public class FormKelurahan extends javax.swing.JFrame {
         kosong();
     }//GEN-LAST:event_cmdTambahActionPerformed
 
-    private void cmdHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdHapusActionPerformed
-        try{
-            String sql="delete from kelurahan where kode='" + txtKode.getText()+ "'";
-            stm.executeUpdate(sql);
-            baca_data();
-        } catch(SQLException e) {
-            JOptionPane.showMessageDialog(null, e);
-        }
-    }//GEN-LAST:event_cmdHapusActionPerformed
-
     private void cmdSimpanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmdSimpanMouseClicked
         String tKode=txtKode.getText();
         String tNama=txtNama.getText();
@@ -340,12 +344,12 @@ public class FormKelurahan extends javax.swing.JFrame {
 
         try {
             if(edit == true) {
-                stm.executeUpdate("update kelurahan set nama='"+tNama+"',kecamatan='"+kKec+"',kuota_ang='"+tKuota+"' where kode='" + tKode + "'");
+                stm.executeUpdate("update kecamatan set nama='"+tNama+"',kabupaten='"+kKab+"',kuota_kel='"+tKuota+"' where kode='" + tKode + "'");
 
             } else {
-                stm.executeUpdate("INSERT into kelurahan VALUES('"+tKode+"','"+tNama+"','"+kKec+"','"+tKuota+"')");
+                stm.executeUpdate("INSERT into kecamatan VALUES('"+tKode+"','"+tNama+"','"+kKab+"','"+tKuota+"')");
             }
-            tblKel.setModel(new DefaultTableModel(dataTable,header));
+            tblKec.setModel(new DefaultTableModel(dataTable,header));
             baca_data();
             aktif(false);
             setTombol(true);
@@ -355,11 +359,6 @@ public class FormKelurahan extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_cmdSimpanMouseClicked
 
-    private void cmdBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdBatalActionPerformed
-        aktif(false);
-        setTombol(true);
-    }//GEN-LAST:event_cmdBatalActionPerformed
-
     private void cmdKoreksiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdKoreksiActionPerformed
         edit=true;
         aktif(true);
@@ -367,9 +366,11 @@ public class FormKelurahan extends javax.swing.JFrame {
         txtKode.setEditable(false);
     }//GEN-LAST:event_cmdKoreksiActionPerformed
 
-    private void cmdKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdKeluarActionPerformed
-        dispose();
-    }//GEN-LAST:event_cmdKeluarActionPerformed
+    private void cmbKabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbKabActionPerformed
+        JComboBox cKab = (javax.swing.JComboBox)evt.getSource();
+        //Membaca Item Yang Terpilih — > String
+        kKab = (String)cKab.getSelectedItem();
+    }//GEN-LAST:event_cmbKabActionPerformed
 
     /**
      * @param args the command line arguments
@@ -388,26 +389,26 @@ public class FormKelurahan extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FormKelurahan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormKecamatan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FormKelurahan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormKecamatan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FormKelurahan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormKecamatan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FormKelurahan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormKecamatan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FormKelurahan().setVisible(true);
+                new FormKecamatan().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> cmbKec;
+    private javax.swing.JComboBox<String> cmbKab;
     private javax.swing.JButton cmdBatal;
     private javax.swing.JButton cmdHapus;
     private javax.swing.JButton cmdKeluar;
@@ -420,7 +421,7 @@ public class FormKelurahan extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable tblKel;
+    private javax.swing.JTable tblKec;
     private javax.swing.JTextField txtKode;
     private javax.swing.JTextField txtKuota;
     private javax.swing.JTextField txtNama;

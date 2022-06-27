@@ -45,7 +45,6 @@ public class FormPeserta extends javax.swing.JFrame {
     }
     
     private void setField() {
-//        format_tanggal();
         int row=tblPeserta.getSelectedRow();
         txtKode.setText((String)tblPeserta.getValueAt(row,0));
         txtNik.setText((String)tblPeserta.getValueAt(row,1));
@@ -247,7 +246,7 @@ public class FormPeserta extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
         jLabel8.setText("Alamat");
 
-        cmbKelamin.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Laki-laki", "Perempuan" }));
+        cmbKelamin.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--- PILIH ---", "Laki-laki", "Perempuan" }));
         cmbKelamin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbKelaminActionPerformed(evt);
