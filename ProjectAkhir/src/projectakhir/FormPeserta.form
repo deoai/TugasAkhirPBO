@@ -94,17 +94,17 @@
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
-                              <Component id="txtKelurahan" min="-2" pref="114" max="-2" attributes="0"/>
+                              <Component id="txtIpk" min="-2" pref="114" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
-                              <Component id="txtKecamatan" min="-2" pref="114" max="-2" attributes="0"/>
+                              <Component id="txtTelp" min="-2" pref="114" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
-                              <Component id="txtKabupaten" min="-2" pref="114" max="-2" attributes="0"/>
+                              <Component id="txtEmail" min="-2" pref="114" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -177,26 +177,26 @@
                           <Component id="txtJurusan" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
-                          <Component id="jScrollPane1" min="-2" pref="86" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtKelurahan" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtIpk" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtKecamatan" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtTelp" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel11" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtKabupaten" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtEmail" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
+                          <Component id="jScrollPane1" min="-2" pref="86" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
                       <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
@@ -329,10 +329,10 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Calibri" size="12" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Kelurahan"/>
+        <Property name="text" type="java.lang.String" value="IPK"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtKelurahan">
+    <Component class="javax.swing.JTextField" name="txtIpk">
       <Properties>
         <Property name="toolTipText" type="java.lang.String" value=""/>
       </Properties>
@@ -342,15 +342,15 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Calibri" size="12" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Kecamatan"/>
+        <Property name="text" type="java.lang.String" value="No HP"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtKecamatan">
+    <Component class="javax.swing.JTextField" name="txtTelp">
       <Properties>
         <Property name="toolTipText" type="java.lang.String" value=""/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtKabupaten">
+    <Component class="javax.swing.JTextField" name="txtEmail">
       <Properties>
         <Property name="toolTipText" type="java.lang.String" value=""/>
       </Properties>
@@ -360,7 +360,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Calibri" size="12" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Kabupaten"/>
+        <Property name="text" type="java.lang.String" value="E-Mail"/>
       </Properties>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
@@ -445,10 +445,10 @@
                 <Column editable="true" title="Umur" type="java.lang.Object"/>
                 <Column editable="true" title="Jenis Kelamin" type="java.lang.Object"/>
                 <Column editable="true" title="Jurusan" type="java.lang.Object"/>
+                <Column editable="true" title="IPK" type="java.lang.Object"/>
+                <Column editable="true" title="No Hp" type="java.lang.Object"/>
+                <Column editable="true" title="E-Mail" type="java.lang.Object"/>
                 <Column editable="true" title="Alamat" type="java.lang.Object"/>
-                <Column editable="true" title="Kelurahan" type="java.lang.Object"/>
-                <Column editable="true" title="Kecamatan" type="java.lang.Object"/>
-                <Column editable="true" title="Kabupaten" type="java.lang.Object"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">

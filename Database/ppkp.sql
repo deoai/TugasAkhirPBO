@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 26 Jun 2022 pada 10.35
+-- Waktu pembuatan: 27 Jun 2022 pada 06.36
 -- Versi server: 10.4.22-MariaDB
 -- Versi PHP: 8.0.13
 
@@ -36,18 +36,18 @@ CREATE TABLE `peserta` (
   `umur` int(2) NOT NULL,
   `jenis_kelamin` varchar(10) NOT NULL,
   `jurusan` varchar(255) NOT NULL,
-  `alamat` text NOT NULL,
-  `kelurahan` varchar(255) NOT NULL,
-  `kecamatan` varchar(255) NOT NULL,
-  `kabupaten` varchar(255) NOT NULL
+  `ipk` float NOT NULL,
+  `no_hp` varchar(15) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `alamat` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data untuk tabel `peserta`
 --
 
-INSERT INTO `peserta` (`kode`, `nik`, `nama`, `tempat_lahir`, `tanggal_lahir`, `umur`, `jenis_kelamin`, `jurusan`, `alamat`, `kelurahan`, `kecamatan`, `kabupaten`) VALUES
-('2', '1212323', 'Nantalira', 'Batang', '2018-09-07', 12, 'Laki-laki', 'Ti', 'Srabanan', 'Babadan', 'Limpung ', 'Batang');
+INSERT INTO `peserta` (`kode`, `nik`, `nama`, `tempat_lahir`, `tanggal_lahir`, `umur`, `jenis_kelamin`, `jurusan`, `ipk`, `no_hp`, `email`, `alamat`) VALUES
+('P01', '15542135421', 'Hafizh', 'Ungaran', '2001-09-09', 20, 'Laki-laki', 'Teknik Informatika', 3.82, '08452312451235', 'hafisxh@gmail.com', 'Jl. Ahmad Dani No.19 Perum Dewa Ungaran');
 
 -- --------------------------------------------------------
 

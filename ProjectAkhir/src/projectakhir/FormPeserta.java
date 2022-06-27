@@ -34,7 +34,7 @@ public class FormPeserta extends javax.swing.JFrame {
     Boolean edit=false;
 
     private Object[][] dataTable = null;
-    private String[] header = {"Kode","NIK","Nama","Tempat","Tanggal","Umur","Jenis Kelamin","Jurusan","Alamat","Kelurahan","Kecamatan","Kabupaten"};
+    private String[] header = {"Kode","NIK","Nama","Tempat","Tanggal","Umur","Jenis Kelamin","Jurusan","IPK","No HP","E-mail","Alamat"};
     
     public FormPeserta() {
         initComponents();
@@ -51,17 +51,16 @@ public class FormPeserta extends javax.swing.JFrame {
         txtNik.setText((String)tblPeserta.getValueAt(row,1));
         txtNama.setText((String)tblPeserta.getValueAt(row,2));
         txtTempat.setText((String)tblPeserta.getValueAt(row,3));
-//        txtTanggal.setToolTipText((String)tblPeserta.getValueAt(row,4));
         txtTanggal.setDate((Date)tblPeserta.getValueAt(row, 4));
         String umur = Integer.toString((Integer)tblPeserta.getValueAt(row,5));
         txtUmur.setText(umur);
         cmbKelamin.setSelectedItem((String)tblPeserta.getValueAt(row,6));
         txtJurusan.setText((String)tblPeserta.getValueAt(row,7));
-        txtAlamat.setText((String)tblPeserta.getValueAt(row,8));
-        txtKelurahan.setText((String)tblPeserta.getValueAt(row,9));
-        txtKecamatan.setText((String)tblPeserta.getValueAt(row,10));
-        txtKabupaten.setText((String)tblPeserta.getValueAt(row,11));
-
+        String ipk = Float.toString((Float)tblPeserta.getValueAt(row, 8));
+        txtIpk.setText(ipk);
+        txtTelp.setText((String)tblPeserta.getValueAt(row,9));
+        txtEmail.setText((String)tblPeserta.getValueAt(row,10));
+        txtAlamat.setText((String)tblPeserta.getValueAt(row,11));
     }
     
     private void open_db() {
@@ -97,10 +96,10 @@ public class FormPeserta extends javax.swing.JFrame {
                 dataTable[x][5] = RsBrg.getInt("umur");
                 dataTable[x][6] = RsBrg.getString("jenis_kelamin");
                 dataTable[x][7] = RsBrg.getString("jurusan");
-                dataTable[x][8] = RsBrg.getString("alamat");
-                dataTable[x][9] = RsBrg.getString("kelurahan");
-                dataTable[x][10] = RsBrg.getString("kecamatan");
-                dataTable[x][11] = RsBrg.getString("kabupaten");
+                dataTable[x][8] = RsBrg.getString("ipk");
+                dataTable[x][9] = RsBrg.getString("no_hp");
+                dataTable[x][10] = RsBrg.getString("email");
+                dataTable[x][11] = RsBrg.getString("alamat");
                 x++;
             } 
             tblPeserta.setModel(new DefaultTableModel(dataTable,header)); 
@@ -110,7 +109,7 @@ public class FormPeserta extends javax.swing.JFrame {
     } 
 
     private void kosong() {
-//        txtKode.setText("");
+        txtKode.setText("");
         txtNik.setText("");
         txtNama.setText("");
         txtTempat.setText("");
@@ -118,9 +117,9 @@ public class FormPeserta extends javax.swing.JFrame {
         txtUmur.setText("");
         txtJurusan.setText("");
         txtAlamat.setText("");
-        txtKelurahan.setText("");
-        txtKecamatan.setText("");
-        txtKabupaten.setText("");
+        txtIpk.setText("");
+        txtTelp.setText("");
+        txtEmail.setText("");
     }
     
     private void aktif(boolean x) {
@@ -132,9 +131,9 @@ public class FormPeserta extends javax.swing.JFrame {
         txtUmur.setEditable(x);
         txtJurusan.setEditable(x);
         txtAlamat.setEditable(x);
-        txtKelurahan.setEditable(x);
-        txtKecamatan.setEditable(x);
-        txtKabupaten.setEditable(x);
+        txtIpk.setEditable(x);
+        txtTelp.setEditable(x);
+        txtEmail.setEditable(x);
     }
     
     private void setTombol(boolean t) {
@@ -147,36 +146,25 @@ public class FormPeserta extends javax.swing.JFrame {
 
     }
     
-    private void kode_auto() {
-        try{
-            stm=Con.createStatement();
-            ResultSet rs=stm.executeQuery("select kode from peserta");
-            int brs=0;
-            while(rs.next()) {
-                brs=rs.getRow();
-            }
-            if(brs==0) {
-                txtKode.setText("1");
-            } else {
-                int nom=brs+1;
-                txtKode.setText(Integer.toString(nom));
-            }
-            rs.close();
-        } catch(SQLException e) {
-            System.out.println("Error : "+e);
-        }
-    } 
-    
-//    private void format_tanggal() {
-//        String DATE_FORMAT = "yyyy-MM-dd";
-//        java.text.SimpleDateFormat sdf = new
-//        java.text.SimpleDateFormat(DATE_FORMAT);
-//        Calendar c1 = Calendar.getInstance();
-//        int year=c1.get(Calendar.YEAR);
-//        int month=c1.get(Calendar.MONTH)+1;
-//        int day=c1.get(Calendar.DAY_OF_MONTH);
-//        tanggal=Integer.toString(year)+"-"+Integer.toString(month)+"-"+Integer.toString(day);
-//    }
+//    private void kode_auto() {
+//        try{
+//            stm=Con.createStatement();
+//            ResultSet rs=stm.executeQuery("select kode from peserta");
+//            int brs=0;
+//            while(rs.next()) {
+//                brs=rs.getRow();
+//            }
+//            if(brs==0) {
+//                txtKode.setText("1");
+//            } else {
+//                int nom=brs+1;
+//                txtKode.setText(Integer.toString(nom));
+//            }
+//            rs.close();
+//        } catch(SQLException e) {
+//            System.out.println("Error : "+e);
+//        }
+//    } 
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -202,10 +190,10 @@ public class FormPeserta extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         cmbKelamin = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
-        txtKelurahan = new javax.swing.JTextField();
+        txtIpk = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        txtKecamatan = new javax.swing.JTextField();
-        txtKabupaten = new javax.swing.JTextField();
+        txtTelp = new javax.swing.JTextField();
+        txtEmail = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtAlamat = new javax.swing.JTextArea();
@@ -267,19 +255,19 @@ public class FormPeserta extends javax.swing.JFrame {
         });
 
         jLabel9.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
-        jLabel9.setText("Kelurahan");
+        jLabel9.setText("IPK");
 
-        txtKelurahan.setToolTipText("");
+        txtIpk.setToolTipText("");
 
         jLabel10.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
-        jLabel10.setText("Kecamatan");
+        jLabel10.setText("No HP");
 
-        txtKecamatan.setToolTipText("");
+        txtTelp.setToolTipText("");
 
-        txtKabupaten.setToolTipText("");
+        txtEmail.setToolTipText("");
 
         jLabel11.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
-        jLabel11.setText("Kabupaten");
+        jLabel11.setText("E-Mail");
 
         txtAlamat.setColumns(20);
         txtAlamat.setRows(5);
@@ -332,7 +320,7 @@ public class FormPeserta extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Kode", "NIK", "Nama", "Tempat Lahir", "Tanggal Lahir", "Umur", "Jenis Kelamin", "Jurusan", "Alamat", "Kelurahan", "Kecamatan", "Kabupaten"
+                "Kode", "NIK", "Nama", "Tempat Lahir", "Tanggal Lahir", "Umur", "Jenis Kelamin", "Jurusan", "IPK", "No Hp", "E-Mail", "Alamat"
             }
         ));
         tblPeserta.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -410,15 +398,15 @@ public class FormPeserta extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addComponent(jLabel9)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtKelurahan, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtIpk, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addComponent(jLabel10)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtKecamatan, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtTelp, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addComponent(jLabel11)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtKabupaten, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
                         .addComponent(txtTanggal, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(31, 31, 31)))
@@ -472,22 +460,22 @@ public class FormPeserta extends javax.swing.JFrame {
                             .addComponent(jLabel7)
                             .addComponent(txtJurusan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel8)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel9)
-                            .addComponent(txtKelurahan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtIpk, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel10)
-                            .addComponent(txtKecamatan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtTelp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel11)
-                            .addComponent(txtKabupaten, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(30, 30, 30))
+                            .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(15, 15, 15)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel8)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(43, 43, 43))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel13)
                         .addGap(18, 18, 18)
@@ -515,7 +503,7 @@ public class FormPeserta extends javax.swing.JFrame {
     private void cmdTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdTambahActionPerformed
         aktif(true);
         setTombol(false);
-        kode_auto();
+//        kode_auto();
         kosong();
     }//GEN-LAST:event_cmdTambahActionPerformed
 
@@ -526,21 +514,20 @@ public class FormPeserta extends javax.swing.JFrame {
         String tTempat=txtTempat.getText();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String tanggal = sdf.format(txtTanggal.getDate());
-//        String tTanggal=txtTanggal.getText();
-//        format_tanggal();
         int tUmur=Integer.parseInt(txtUmur.getText());
         String tJurusan=txtJurusan.getText();
+        float tIpk=Float.parseFloat(txtIpk.getText());
+        String tTelp=txtTelp.getText();
+        String tEmail=txtEmail.getText();
         String tAlamat=txtAlamat.getText();
-        String tKelurahan=txtKelurahan.getText();
-        String tKecamatan=txtKecamatan.getText();
-        String tKabupaten=txtKabupaten.getText();
+
         
         try {
             if(edit == true) {
-                stm.executeUpdate("update peserta set nik='"+tNik+"',nama='"+tNama+"',tempat_lahir='"+tTempat+"',tanggal_lahir='"+tanggal+"',umur='"+tUmur+"',jenis_kelamin='"+kKelamin+"',jurusan='"+tJurusan+"',alamat='"+tAlamat+"',kelurahan='"+tKelurahan+"',kecamatan='"+tKecamatan+"',kabupaten='"+tKabupaten+"' where kode='" + tKode + "'");
+                stm.executeUpdate("update peserta set nik='"+tNik+"',nama='"+tNama+"',tempat_lahir='"+tTempat+"',tanggal_lahir='"+tanggal+"',umur='"+tUmur+"',jenis_kelamin='"+kKelamin+"',jurusan='"+tJurusan+"',ipk='"+tIpk+"',no_hp='"+tTelp+"',email='"+tEmail+"',alamat='"+tAlamat+"' where kode='" + tKode + "'");
 
             } else {
-                stm.executeUpdate("INSERT into peserta VALUES('"+tKode+"','"+tNik+"','"+tNama+"','"+tTempat+"','"+tanggal+"','"+tUmur+"','"+kKelamin+"','"+tJurusan+"','"+tAlamat+"','"+tKelurahan+"','"+tKecamatan+"','"+tKabupaten+"')");
+                stm.executeUpdate("INSERT into peserta VALUES('"+tKode+"','"+tNik+"','"+tNama+"','"+tTempat+"','"+tanggal+"','"+tUmur+"','"+kKelamin+"','"+tJurusan+"','"+tIpk+"','"+tTelp+"','"+tEmail+"','"+tAlamat+"')");
             }
             tblPeserta.setModel(new DefaultTableModel(dataTable,header));
             baca_data();
@@ -643,14 +630,14 @@ public class FormPeserta extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable tblPeserta;
     private javax.swing.JTextArea txtAlamat;
+    private javax.swing.JTextField txtEmail;
+    private javax.swing.JTextField txtIpk;
     private javax.swing.JTextField txtJurusan;
-    private javax.swing.JTextField txtKabupaten;
-    private javax.swing.JTextField txtKecamatan;
-    private javax.swing.JTextField txtKelurahan;
     private javax.swing.JTextField txtKode;
     private javax.swing.JTextField txtNama;
     private javax.swing.JTextField txtNik;
     private com.toedter.calendar.JDateChooser txtTanggal;
+    private javax.swing.JTextField txtTelp;
     private javax.swing.JTextField txtTempat;
     private javax.swing.JTextField txtUmur;
     // End of variables declaration//GEN-END:variables
