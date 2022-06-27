@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 27 Jun 2022 pada 06.36
+-- Waktu pembuatan: 27 Jun 2022 pada 07.50
 -- Versi server: 10.4.22-MariaDB
 -- Versi PHP: 8.0.13
 
@@ -20,6 +20,42 @@ SET time_zone = "+00:00";
 --
 -- Database: `ppkp`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `kabupaten`
+--
+
+CREATE TABLE `kabupaten` (
+  `kode` varchar(5) NOT NULL,
+  `nama` varchar(100) NOT NULL,
+  `kuota_kec` int(3) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `kecamatan`
+--
+
+CREATE TABLE `kecamatan` (
+  `kode` varchar(5) NOT NULL,
+  `nama` varchar(100) NOT NULL,
+  `kuota_kel` int(3) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `kelurahan`
+--
+
+CREATE TABLE `kelurahan` (
+  `kode` varchar(5) NOT NULL,
+  `nama` varchar(100) NOT NULL,
+  `kuota_ang` int(3) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
