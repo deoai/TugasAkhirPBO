@@ -28,19 +28,24 @@ public class FormMenu extends javax.swing.JFrame {
     private void initComponents() {
 
         jMenu3 = new javax.swing.JMenu();
+        jMenuItem4 = new javax.swing.JMenuItem();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         dtPeserta = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        dtUser = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         dtKab = new javax.swing.JMenuItem();
         dtKec = new javax.swing.JMenuItem();
         dtKel = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        jMenu4 = new javax.swing.JMenu();
+        dtTrans = new javax.swing.JMenu();
+        dtAdmin = new javax.swing.JMenuItem();
+        dtLap = new javax.swing.JMenu();
+        dtLapPst = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
 
         jMenu3.setText("jMenu3");
+
+        jMenuItem4.setText("jMenuItem4");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Form Menu");
@@ -55,13 +60,13 @@ public class FormMenu extends javax.swing.JFrame {
         });
         jMenu1.add(dtPeserta);
 
-        jMenuItem2.setText("User");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        dtUser.setText("User");
+        dtUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                dtUserActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem2);
+        jMenu1.add(dtUser);
         jMenu1.add(jSeparator1);
 
         dtKab.setText("Data Kabupaten");
@@ -90,11 +95,29 @@ public class FormMenu extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Transaksi");
-        jMenuBar1.add(jMenu2);
+        dtTrans.setText("Transaksi");
 
-        jMenu4.setText("Laporan");
-        jMenuBar1.add(jMenu4);
+        dtAdmin.setText("Seleksi Administrasi");
+        dtAdmin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dtAdminActionPerformed(evt);
+            }
+        });
+        dtTrans.add(dtAdmin);
+
+        jMenuBar1.add(dtTrans);
+
+        dtLap.setText("Laporan");
+
+        dtLapPst.setText("Laporan Peserta");
+        dtLapPst.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dtLapPstActionPerformed(evt);
+            }
+        });
+        dtLap.add(dtLapPst);
+
+        jMenuBar1.add(dtLap);
 
         jMenu5.setText("Utility");
         jMenuBar1.add(jMenu5);
@@ -131,9 +154,17 @@ public class FormMenu extends javax.swing.JFrame {
         new FormKelurahan().setVisible(true);
     }//GEN-LAST:event_dtKelActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    private void dtUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dtUserActionPerformed
         new FormUser().setVisible(true);
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    }//GEN-LAST:event_dtUserActionPerformed
+
+    private void dtAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dtAdminActionPerformed
+        new FormAdministrasi().setVisible(true);
+    }//GEN-LAST:event_dtAdminActionPerformed
+
+    private void dtLapPstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dtLapPstActionPerformed
+        new FormLapPeserta().setVisible(true);
+    }//GEN-LAST:event_dtLapPstActionPerformed
 
     /**
      * @param args the command line arguments
@@ -171,17 +202,20 @@ public class FormMenu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem dtAdmin;
     private javax.swing.JMenuItem dtKab;
     private javax.swing.JMenuItem dtKec;
     private javax.swing.JMenuItem dtKel;
+    private javax.swing.JMenu dtLap;
+    private javax.swing.JMenuItem dtLapPst;
     private javax.swing.JMenuItem dtPeserta;
+    private javax.swing.JMenu dtTrans;
+    private javax.swing.JMenuItem dtUser;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     // End of variables declaration//GEN-END:variables
 }
