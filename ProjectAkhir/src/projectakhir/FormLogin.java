@@ -42,7 +42,7 @@ public class FormLogin extends javax.swing.JFrame {
             String password;
             password = new String(input);
             stm = Con.createStatement();
-            RsUser=stm.executeQuery("select * from user where user_id='" + txtUserId.getText() + "' and password=md5('"+password+"')");
+            RsUser=stm.executeQuery("select * from user where user_id='" + txtUserId.getText() + "' and password=('"+password+"')");
             int baris=0;
             while(RsUser.next()) {
                 baris = RsUser.getRow();

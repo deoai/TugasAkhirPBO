@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 27 Jun 2022 pada 10.15
--- Versi server: 10.4.22-MariaDB
--- Versi PHP: 8.0.13
+-- Waktu pembuatan: 27 Jun 2022 pada 18.51
+-- Versi server: 10.4.24-MariaDB
+-- Versi PHP: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -120,7 +120,6 @@ INSERT INTO `peserta` (`kode`, `nik`, `nama`, `tempat_lahir`, `tanggal_lahir`, `
 --
 
 CREATE TABLE `user` (
-  `id` int(4) NOT NULL,
   `user_id` varchar(10) DEFAULT NULL,
   `name` varchar(30) DEFAULT NULL,
   `password` varchar(254) DEFAULT NULL
@@ -130,11 +129,8 @@ CREATE TABLE `user` (
 -- Dumping data untuk tabel `user`
 --
 
-INSERT INTO `user` (`id`, `user_id`, `name`, `password`) VALUES
-(1, 'admin', 'admin', '827ccb0eea8a706c4c34a16891f84e7b'),
-(2, 'yayas', 'yayas', '61c965b0758b6d9316e0bb041570ba7f'),
-(3, 'aku', 'aku', '26c42cfa0f21a1a2c069fdd645e78979'),
-(4, 'Nanta', 'nt', 'dbf0ecbe1a3d12d50699158bf6370431');
+INSERT INTO `user` (`user_id`, `name`, `password`) VALUES
+('aa', 'aaaa', 'aa');
 
 --
 -- Indexes for dumped tables
@@ -145,22 +141,6 @@ INSERT INTO `user` (`id`, `user_id`, `name`, `password`) VALUES
 --
 ALTER TABLE `peserta`
   ADD PRIMARY KEY (`kode`);
-
---
--- Indeks untuk tabel `user`
---
-ALTER TABLE `user`
-  ADD PRIMARY KEY (`id`);
-
---
--- AUTO_INCREMENT untuk tabel yang dibuang
---
-
---
--- AUTO_INCREMENT untuk tabel `user`
---
-ALTER TABLE `user`
-  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
