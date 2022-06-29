@@ -278,7 +278,7 @@ public class FormAdministrasi extends javax.swing.JFrame {
 //        int row = tblAdm.getRowCount();
         for(int row=0;row<tblAdm.getRowCount();row++) {
             String tKode = (String)tblAdm.getValueAt(row, 0);
-            System.out.println(tKode);
+//            System.out.println(tKode);
             String tNama = (String) tblAdm.getValueAt(row, 1);
             int uUmur = (Integer)tblAdm.getValueAt(row, 2);
             String tJurusan = (String) tblAdm.getValueAt(row, 3);

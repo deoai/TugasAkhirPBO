@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 27 Jun 2022 pada 23.46
+-- Waktu pembuatan: 29 Jun 2022 pada 05.55
 -- Versi server: 10.4.22-MariaDB
 -- Versi PHP: 8.0.13
 
@@ -106,6 +106,30 @@ CREATE TABLE `kelurahan` (
 
 INSERT INTO `kelurahan` (`kode`, `nama`, `kecamatan`, `kuota_ang`) VALUES
 ('KL01', 'Babadan', 'Limpung', 11);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `penilaian`
+--
+
+CREATE TABLE `penilaian` (
+  `kode` varchar(5) NOT NULL,
+  `nama` varchar(255) NOT NULL,
+  `umur` int(2) NOT NULL,
+  `jurusan` varchar(255) NOT NULL,
+  `ipk` float NOT NULL,
+  `tertulis` float NOT NULL,
+  `wawancara` float NOT NULL,
+  `nilai_akhir` float NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `penilaian`
+--
+
+INSERT INTO `penilaian` (`kode`, `nama`, `umur`, `jurusan`, `ipk`, `tertulis`, `wawancara`, `nilai_akhir`) VALUES
+('P01', 'Hafizh', 20, 'Teknik Informatika', 3.82, 90, 54, 72);
 
 -- --------------------------------------------------------
 

@@ -39,6 +39,7 @@ public class FormMenu extends javax.swing.JFrame {
         dtKel = new javax.swing.JMenuItem();
         dtTrans = new javax.swing.JMenu();
         dtAdmin = new javax.swing.JMenuItem();
+        dtPenilaian = new javax.swing.JMenuItem();
         dtLap = new javax.swing.JMenu();
         dtLapPst = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
@@ -105,6 +106,14 @@ public class FormMenu extends javax.swing.JFrame {
         });
         dtTrans.add(dtAdmin);
 
+        dtPenilaian.setText("Seleksi Penilaian");
+        dtPenilaian.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dtPenilaianActionPerformed(evt);
+            }
+        });
+        dtTrans.add(dtPenilaian);
+
         jMenuBar1.add(dtTrans);
 
         dtLap.setText("Laporan");
@@ -166,6 +175,10 @@ public class FormMenu extends javax.swing.JFrame {
         new FormLapPeserta().setVisible(true);
     }//GEN-LAST:event_dtLapPstActionPerformed
 
+    private void dtPenilaianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dtPenilaianActionPerformed
+        new FormPenilaian().setVisible(true);
+    }//GEN-LAST:event_dtPenilaianActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -208,6 +221,7 @@ public class FormMenu extends javax.swing.JFrame {
     private javax.swing.JMenuItem dtKel;
     private javax.swing.JMenu dtLap;
     private javax.swing.JMenuItem dtLapPst;
+    private javax.swing.JMenuItem dtPenilaian;
     private javax.swing.JMenuItem dtPeserta;
     private javax.swing.JMenu dtTrans;
     private javax.swing.JMenuItem dtUser;
