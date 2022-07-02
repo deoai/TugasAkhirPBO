@@ -52,13 +52,41 @@ public class FormAdministrasi extends javax.swing.JFrame {
         }
     }
     
-    private void baca_data() {
+    private void seleksi_data() {
         try {
             float iIpk = Float.parseFloat(txtIpk.getText());
             int uUmur = Integer.parseInt(txtUmur.getText());
 //            System.out.println(iIpk);
             stm = Con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
             RsBrg = stm.executeQuery("select kode, nama, umur, jurusan, ipk from peserta where ipk >= "+iIpk+" and umur <= "+uUmur+" ");
+
+            ResultSetMetaData meta = RsBrg.getMetaData();
+            int col = meta.getColumnCount();
+            int baris = 0; 
+            while(RsBrg.next()) {
+                baris = RsBrg.getRow();
+            } 
+            dataTable = new Object[baris][col];
+            int x = 0;
+            RsBrg.beforeFirst();
+            while(RsBrg.next()) {
+                dataTable[x][0] = RsBrg.getString("kode");
+                dataTable[x][1] = RsBrg.getString("nama");
+                dataTable[x][2] = RsBrg.getInt("umur");
+                dataTable[x][3] = RsBrg.getString("jurusan");
+                dataTable[x][4] = RsBrg.getFloat("ipk");
+                x++;
+            } 
+            tblAdm.setModel(new DefaultTableModel(dataTable,header)); 
+        } catch(SQLException e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
+    
+    private void baca_data() {
+        try {
+            stm = Con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
+            RsBrg = stm.executeQuery("select * from administrasi");
 
             ResultSetMetaData meta = RsBrg.getMetaData();
             int col = meta.getColumnCount();
@@ -146,13 +174,15 @@ public class FormAdministrasi extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         txtIpk = new javax.swing.JTextField();
-        cmdSeleksi = new javax.swing.JButton();
+        cmdLihat = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblAdm = new javax.swing.JTable();
         jScrollPane3 = new javax.swing.JScrollPane();
         text = new javax.swing.JTextArea();
         cmdSimpan = new javax.swing.JButton();
         cmdCetak = new javax.swing.JButton();
+        cmdSeleksi1 = new javax.swing.JButton();
+        cmdReset = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Form Seleksi Administrasi");
@@ -170,10 +200,10 @@ public class FormAdministrasi extends javax.swing.JFrame {
 
         txtIpk.setToolTipText("");
 
-        cmdSeleksi.setText("Seleksi");
-        cmdSeleksi.addActionListener(new java.awt.event.ActionListener() {
+        cmdLihat.setText("Lihat");
+        cmdLihat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmdSeleksiActionPerformed(evt);
+                cmdLihatActionPerformed(evt);
             }
         });
 
@@ -210,16 +240,31 @@ public class FormAdministrasi extends javax.swing.JFrame {
             }
         });
 
+        cmdSeleksi1.setText("Seleksi");
+        cmdSeleksi1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdSeleksi1ActionPerformed(evt);
+            }
+        });
+
+        cmdReset.setText("Reset");
+        cmdReset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdResetActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jScrollPane3)
-                    .addComponent(jScrollPane2)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jScrollPane3)
+                        .addComponent(jScrollPane2))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addGroup(layout.createSequentialGroup()
@@ -232,13 +277,17 @@ public class FormAdministrasi extends javax.swing.JFrame {
                                         .addComponent(jLabel2)
                                         .addGap(18, 18, 18)
                                         .addComponent(txtUmur, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(18, 18, 18)
-                                .addComponent(cmdSeleksi)))
-                        .addGap(18, 18, 18)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(cmdSeleksi1)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(cmdSimpan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cmdCetak, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(cmdCetak, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cmdLihat, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cmdReset, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -246,24 +295,32 @@ public class FormAdministrasi extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(cmdSimpan)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(cmdCetak))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel12)
-                            .addComponent(txtIpk, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(cmdSimpan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(cmdLihat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(cmdCetak)
+                                    .addComponent(cmdReset, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel12)
+                                    .addComponent(txtIpk, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel2)
+                                    .addComponent(txtUmur, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(txtUmur, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(cmdSeleksi, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(cmdSeleksi1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -295,7 +352,7 @@ public class FormAdministrasi extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, e);
             }
         }
-        
+        JOptionPane.showMessageDialog(null, "Data Tersimpan");
     }//GEN-LAST:event_cmdSimpanActionPerformed
 
     private void cmdCetakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdCetakActionPerformed
@@ -328,10 +385,27 @@ public class FormAdministrasi extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_cmdCetakActionPerformed
 
-    private void cmdSeleksiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdSeleksiActionPerformed
+    private void cmdLihatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdLihatActionPerformed
         baca_data();
-        System.out.println();
-    }//GEN-LAST:event_cmdSeleksiActionPerformed
+    }//GEN-LAST:event_cmdLihatActionPerformed
+
+    private void cmdSeleksi1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdSeleksi1ActionPerformed
+        try {
+            seleksi_data();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Isi Data Dulu");
+        }
+    }//GEN-LAST:event_cmdSeleksi1ActionPerformed
+
+    private void cmdResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdResetActionPerformed
+        try{
+            String sql="delete from administrasi ";
+            stm.executeUpdate(sql);
+            baca_data();
+        } catch(SQLException e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }//GEN-LAST:event_cmdResetActionPerformed
 
     /**
      * @param args the command line arguments
@@ -370,7 +444,9 @@ public class FormAdministrasi extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cmdCetak;
-    private javax.swing.JButton cmdSeleksi;
+    private javax.swing.JButton cmdLihat;
+    private javax.swing.JButton cmdReset;
+    private javax.swing.JButton cmdSeleksi1;
     private javax.swing.JButton cmdSimpan;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;

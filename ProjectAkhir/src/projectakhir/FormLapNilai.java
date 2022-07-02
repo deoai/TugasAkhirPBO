@@ -52,7 +52,7 @@ public class FormLapNilai extends javax.swing.JFrame {
     private void baca_data() {
         try {
             stm = Con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
-            RsBrg = stm.executeQuery("select * from penilaian");
+            RsBrg = stm.executeQuery("select * from penilaian order by nilai_akhir desc");
 
             ResultSetMetaData meta = RsBrg.getMetaData();
             int col = meta.getColumnCount();
@@ -157,7 +157,7 @@ public class FormLapNilai extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cmdExport)
                     .addComponent(cmdView))
-                .addContainerGap())
+                .addGap(15, 15, 15))
         );
 
         pack();
@@ -169,7 +169,7 @@ public class FormLapNilai extends javax.swing.JFrame {
 
     private void cmdExportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdExportActionPerformed
         try {
-            ExportToExcel ex=new ExportToExcel(tblNilai, new File("DataPeserta.xls"));
+            ExportToExcel ex=new ExportToExcel(tblNilai, new File("DataPenilaian.xls"));
             //exportToExcel(tblBrg, new File("DataBarang.xls"));
             JOptionPane.showMessageDialog(null, "Sukses Export data.....");
         } catch (Exception e) {
@@ -181,10 +181,10 @@ public class FormLapNilai extends javax.swing.JFrame {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             open_db();
-            String reportPath = "ReportPeserta.jrxml";
+            String reportPath = "ReportPenilaian.jrxml";
             JasperReport jr = JasperCompileManager.compileReport(reportPath);
             JasperPrint jp = JasperFillManager.fillReport(jr,null, Con);
-            JasperViewer.viewReport(jp);
+            JasperViewer.viewReport(jp,false);
             Con.close();
 
         } catch (Exception ex) {

@@ -190,7 +190,7 @@ public class FormLapPeserta extends javax.swing.JFrame {
             String reportPath = "ReportPeserta.jrxml";
             JasperReport jr = JasperCompileManager.compileReport(reportPath);
             JasperPrint jp = JasperFillManager.fillReport(jr,null, Con);
-            JasperViewer.viewReport(jp);
+            JasperViewer.viewReport(jp,false);
             Con.close(); 
 
         } catch (Exception ex) {

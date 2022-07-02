@@ -73,12 +73,11 @@ from peserta order by kode asc]]>
 	</field>
 	<background>
 		<band height="575" splitType="Stretch">
-			<image vAlign="Bottom">
-				<reportElement positionType="Float" x="-20" y="66" width="105" height="409" uuid="64ca4020-b604-4de9-9ed1-921b74cfd593"/>
-				<imageExpression><![CDATA["waves.jpg"]]></imageExpression>
-			</image>
+			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.FreeLayout"/>
 			<frame>
-				<reportElement mode="Opaque" x="-20" y="475" width="105" height="100" backcolor="#666666" uuid="6eb7cb61-0dd7-47a8-8475-5fa6c3a348dc"/>
+				<reportElement mode="Opaque" x="0" y="507" width="802" height="67" backcolor="#666666" uuid="6eb7cb61-0dd7-47a8-8475-5fa6c3a348dc">
+					<property name="com.jaspersoft.studio.layout"/>
+				</reportElement>
 				<textField>
 					<reportElement style="Column header" x="0" y="0" width="104" height="73" forecolor="#000000" uuid="db8457c8-99e9-434f-b439-2d400dff2bcd"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -202,8 +201,9 @@ from peserta order by kode asc]]>
 	</columnHeader>
 	<detail>
 		<band height="21" splitType="Stretch">
+			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.spreadsheet.SpreadsheetLayout"/>
 			<frame>
-				<reportElement x="0" y="1" width="802" height="15" uuid="89a3da05-fdde-4ffe-965f-cc476f72e3ab"/>
+				<reportElement x="0" y="0" width="802" height="21" uuid="89a3da05-fdde-4ffe-965f-cc476f72e3ab"/>
 				<textField>
 					<reportElement style="Detail" x="0" y="0" width="58" height="15" uuid="63a31fa9-55d5-441b-9683-ab8309f1619d">
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="f47429d7-bb50-4a46-9fb8-6e1ff22ae303"/>
@@ -278,7 +278,7 @@ from peserta order by kode asc]]>
 				</textField>
 			</frame>
 			<line>
-				<reportElement positionType="FixRelativeToBottom" x="97" y="16" width="705" height="1" uuid="e5f21b91-7f24-498e-97a1-0e93db9225a4"/>
+				<reportElement positionType="FixRelativeToBottom" x="802" y="0" width="705" height="21" uuid="e5f21b91-7f24-498e-97a1-0e93db9225a4"/>
 				<graphicElement>
 					<pen lineWidth="0.5" lineColor="#999999"/>
 				</graphicElement>

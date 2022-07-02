@@ -57,13 +57,19 @@ public class FormLapAkhir extends javax.swing.JFrame {
             RsBrg = stm.executeQuery("select * from penilaian order by nilai_akhir desc");
 
             ResultSetMetaData meta = RsBrg.getMetaData();
+            int stop = 3;
             int col = meta.getColumnCount();
             int baris = 0; 
             while(RsBrg.next()) {
                 baris = RsBrg.getRow();
-            } 
+                if(baris == stop) {
+                    break;
+                }
+            }
+            System.out.println(baris);
             dataTable = new Object[baris][col];
             int x = 0;
+            
             RsBrg.beforeFirst();
             while(RsBrg.next()) {
                 dataTable[x][0] = RsBrg.getString("kode");
@@ -75,6 +81,9 @@ public class FormLapAkhir extends javax.swing.JFrame {
                 dataTable[x][6] = RsBrg.getFloat("wawancara");
                 dataTable[x][7] = RsBrg.getFloat("nilai_akhir");
                 x++;
+                if(x == stop) {
+                    break;
+                }
             } 
             tblNilai.setModel(new DefaultTableModel(dataTable,header)); 
         } catch(SQLException e) {
@@ -96,7 +105,7 @@ public class FormLapAkhir extends javax.swing.JFrame {
         cmdExport = new javax.swing.JButton();
         cmdView = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel13.setFont(new java.awt.Font("Calibri", 1, 36)); // NOI18N
         jLabel13.setText("Laporan Peserta Lolos");
@@ -183,10 +192,10 @@ public class FormLapAkhir extends javax.swing.JFrame {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             open_db();
-            String reportPath = "ReportPeserta.jrxml";
+            String reportPath = "ReportNilaiAkhir.jrxml";
             JasperReport jr = JasperCompileManager.compileReport(reportPath);
             JasperPrint jp = JasperFillManager.fillReport(jr,null, Con);
-            JasperViewer.viewReport(jp);
+            JasperViewer.viewReport(jp,false);
             Con.close();
 
         } catch (Exception ex) {

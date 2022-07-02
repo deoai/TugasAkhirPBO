@@ -75,7 +75,7 @@ public class FormPeserta extends javax.swing.JFrame {
     private void baca_data() {
         try {
             stm = Con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
-            RsBrg = stm.executeQuery("select * from peserta");
+            RsBrg = stm.executeQuery("select * from peserta order by kode asc");
 
             ResultSetMetaData meta = RsBrg.getMetaData();
             int col = meta.getColumnCount();

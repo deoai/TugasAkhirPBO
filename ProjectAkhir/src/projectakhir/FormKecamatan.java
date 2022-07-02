@@ -309,7 +309,7 @@ public class FormKecamatan extends javax.swing.JFrame {
 
     private void cmdHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdHapusActionPerformed
         try{
-            String sql="delete from kabupaten where kode='" + txtKode.getText()+ "'";
+            String sql="delete from kecamatan where kode='" + txtKode.getText()+ "'";
             stm.executeUpdate(sql);
             baca_data();
         } catch(SQLException e) {

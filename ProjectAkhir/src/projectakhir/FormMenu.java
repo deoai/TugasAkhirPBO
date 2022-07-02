@@ -42,7 +42,11 @@ public class FormMenu extends javax.swing.JFrame {
         dtPenilaian = new javax.swing.JMenuItem();
         dtLap = new javax.swing.JMenu();
         dtLapPst = new javax.swing.JMenuItem();
+        dtLapAdm = new javax.swing.JMenuItem();
+        dtLapNilai = new javax.swing.JMenuItem();
+        dtLapLolos = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         jMenu3.setText("jMenu3");
 
@@ -126,9 +130,42 @@ public class FormMenu extends javax.swing.JFrame {
         });
         dtLap.add(dtLapPst);
 
+        dtLapAdm.setText("Laporan Administrasi");
+        dtLapAdm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dtLapAdmActionPerformed(evt);
+            }
+        });
+        dtLap.add(dtLapAdm);
+
+        dtLapNilai.setText("Laporan Nilai");
+        dtLapNilai.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dtLapNilaiActionPerformed(evt);
+            }
+        });
+        dtLap.add(dtLapNilai);
+
+        dtLapLolos.setText("Laporan Peserta Lolos");
+        dtLapLolos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dtLapLolosActionPerformed(evt);
+            }
+        });
+        dtLap.add(dtLapLolos);
+
         jMenuBar1.add(dtLap);
 
         jMenu5.setText("Utility");
+
+        jMenuItem1.setText("jMenuItem1");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu5.add(jMenuItem1);
+
         jMenuBar1.add(jMenu5);
 
         setJMenuBar(jMenuBar1);
@@ -176,8 +213,26 @@ public class FormMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_dtLapPstActionPerformed
 
     private void dtPenilaianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dtPenilaianActionPerformed
-        new FormPenilaian().setVisible(true);
+        new FormNilai().setVisible(true);
     }//GEN-LAST:event_dtPenilaianActionPerformed
+
+    private void dtLapNilaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dtLapNilaiActionPerformed
+        new FormLapNilai().setVisible(true);
+    }//GEN-LAST:event_dtLapNilaiActionPerformed
+
+    private void dtLapAdmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dtLapAdmActionPerformed
+        new FormLapAdministrasi().setVisible(true);
+        
+    }//GEN-LAST:event_dtLapAdmActionPerformed
+
+    private void dtLapLolosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dtLapLolosActionPerformed
+        new FormLapAkhir().setVisible(true);
+    }//GEN-LAST:event_dtLapLolosActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        new FormLogin().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -220,6 +275,9 @@ public class FormMenu extends javax.swing.JFrame {
     private javax.swing.JMenuItem dtKec;
     private javax.swing.JMenuItem dtKel;
     private javax.swing.JMenu dtLap;
+    private javax.swing.JMenuItem dtLapAdm;
+    private javax.swing.JMenuItem dtLapLolos;
+    private javax.swing.JMenuItem dtLapNilai;
     private javax.swing.JMenuItem dtLapPst;
     private javax.swing.JMenuItem dtPenilaian;
     private javax.swing.JMenuItem dtPeserta;
@@ -229,6 +287,7 @@ public class FormMenu extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     // End of variables declaration//GEN-END:variables

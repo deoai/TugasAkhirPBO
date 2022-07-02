@@ -53,7 +53,7 @@ public class FormLapAdministrasi extends javax.swing.JFrame {
     private void baca_data() {
         try {
             stm = Con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
-            RsBrg = stm.executeQuery("select * from administrasi");
+            RsBrg = stm.executeQuery("select * from administrasi order by ipk desc");
 
             ResultSetMetaData meta = RsBrg.getMetaData();
             int col = meta.getColumnCount();
@@ -92,7 +92,7 @@ public class FormLapAdministrasi extends javax.swing.JFrame {
         cmdExport = new javax.swing.JButton();
         cmdView = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Hasil Seleksi Administrasi");
 
         jLabel13.setFont(new java.awt.Font("Calibri", 1, 36)); // NOI18N
@@ -168,7 +168,7 @@ public class FormLapAdministrasi extends javax.swing.JFrame {
 
     private void cmdExportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdExportActionPerformed
         try {
-            ExportToExcel ex=new ExportToExcel(tblAdm, new File("DataPeserta.xls"));
+            ExportToExcel ex=new ExportToExcel(tblAdm, new File("DataAdministrasi.xls"));
             //exportToExcel(tblBrg, new File("DataBarang.xls"));
             JOptionPane.showMessageDialog(null, "Sukses Export data.....");
         } catch (Exception e) {
@@ -180,10 +180,10 @@ public class FormLapAdministrasi extends javax.swing.JFrame {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             open_db();
-            String reportPath = "ReportPeserta.jrxml";
+            String reportPath = "ReportAdministrasi.jrxml";
             JasperReport jr = JasperCompileManager.compileReport(reportPath);
             JasperPrint jp = JasperFillManager.fillReport(jr,null, Con);
-            JasperViewer.viewReport(jp);
+            JasperViewer.viewReport(jp,false);
             Con.close();
 
         } catch (Exception ex) {
